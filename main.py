@@ -36,13 +36,18 @@ def get_stats():
             headers=headers,
         ).json()
 
-        for repo in data:
-            if repo["fork"]:
-                continue
-            repo_list.append(repo["full_name"])
+        try:
+            for repo in data:
+                if repo["fork"]:
+                    continue
+                repo_list.append(repo["full_name"])
 
-        if len(data) < 100:
-            break
+            if len(data) < 100:
+                break
+        except Exception as e:
+            print(data)
+            print(e)
+            exit(1)
 
     langs: typing.Dict[str, int] = defaultdict(int)
     lines_all = 0
