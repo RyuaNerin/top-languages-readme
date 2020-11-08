@@ -8,6 +8,10 @@ inputs:
     required: true
     default: ${{ github.token }}
 
+  GH_PRIVATE_TOKEN:
+    description: 'GitHub access token to access private repo'
+    required: false
+
   USERNAME:
     description: 'Your GitHub username'
     default: ${{ github.repository_owner }}
