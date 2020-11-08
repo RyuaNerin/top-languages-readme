@@ -12,9 +12,7 @@ END_COMMENT = "<!--END_SECTION:top_language-->"
 listReg = f"{START_COMMENT}[\\s\\S]+{END_COMMENT}"
 
 owner = os.getenv("INPUT_USERNAME")
-ghtoken = os.getenv("INPUT_GH_PRIVATE_TOKEN")
-if ghtoken == "":
-    ghtoken = os.getenv("INPUT_GH_TOKEN")
+ghtoken = os.getenv("INPUT_GH_TOKEN")
 
 commit_message = os.getenv("INPUT_COMMIT_MESSAGE")
 
