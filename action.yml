@@ -1,6 +1,6 @@
 name: 'Top-Languages - Readme'
 author: RyuaNerin
-description: 'Add top most langauges in your Readme'
+description: 'Add development language usage statistics on your Profile Readme'
 
 inputs:
   GH_TOKEN:
