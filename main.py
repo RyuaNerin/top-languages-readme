@@ -31,10 +31,17 @@ def get_stats():
     page = 0
     while True:
         page += 1
-        data = requests.get(
+        res = requests.get(
             f"https://api.github.com/user/repos?visibility=all&per_page=100&page={page}",
             headers=headers,
-        ).json()
+        )
+        if res.status_code != 200:
+            res = requests.get(
+                f"https://api.github.com/users/{owner}/repos?per_page=100&type=all&page={page}",
+                headers=headers,
+            )
+
+        data = res.json()
 
         try:
             for repo in data:
@@ -45,7 +52,6 @@ def get_stats():
             if len(data) < 100:
                 break
         except Exception as e:
-            print(data)
             raise e
 
     langs: typing.Dict[str, int] = defaultdict(int)
