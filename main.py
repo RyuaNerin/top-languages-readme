@@ -32,7 +32,7 @@ def get_stats():
     while True:
         page += 1
         data = requests.get(
-            f"https://api.github.com/users/{owner}/repos?per_page=100&type=all&page={page}",
+            f"https://api.github.com/user/repos?visibility=all&per_page=100&page={page}",
             headers=headers,
         ).json()
 
