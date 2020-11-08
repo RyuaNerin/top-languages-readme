@@ -77,8 +77,8 @@ def get_stats():
     for (lang, lines) in langs:
         """
             ___             _                      _
-        C#     153,153 lines |||||||||||||||||||    80.00 %
-        Java    12,345 lines ||||||||||              8.12 %
+        C#     153,153 bytes |||||||||||||||||||    80.00 %
+        Java    12,345 bytes ||||||||||              8.12 %
         """
         percent = 100.0 * lines / lines_all
 
@@ -91,7 +91,7 @@ def get_stats():
         )
         fmt_percent = format(percent, "0.2f").rjust(5)
 
-        data_list.append(f"{fmt_name}   {fmt_lines} lines {fmt_bar} {fmt_percent} %")
+        data_list.append(f"{fmt_name}   {fmt_lines} bytes {fmt_bar} {fmt_percent} %")
 
     print("Graph Generated")
     data = "\n".join(data_list)
