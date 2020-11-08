@@ -88,7 +88,7 @@ jobs:
     C                4,356 lines ░░░░░░░░░░░░░░░░░░░░░░░░    0.11 %
     ```
 
-- if set EMPTY_BLOCK to ' '
+- if set EMPTY_BLOCK to '` `'
 
     ```txt
     C#           3,057,137 lines ███████████████████       76.48 %
