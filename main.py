@@ -46,6 +46,7 @@ def get_stats():
     repo_list: typing.List[str] = []
 
     headers = {
+        "Accept": "application/vnd.github.v3+json",
         "Authorization": "bearer " + ghtoken,
     }
 
