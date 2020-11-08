@@ -35,7 +35,7 @@ inputs:
 
   HIDE_SIZE:
     description: "Hide the number of characters per language."
-    default: true
+    default: false
     required: false
 
   BAR_WIDTH:
