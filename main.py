@@ -46,8 +46,7 @@ def get_stats():
                 break
         except Exception as e:
             print(data)
-            print(e)
-            exit(1)
+            raise e
 
     langs: typing.Dict[str, int] = defaultdict(int)
     lines_all = 0
