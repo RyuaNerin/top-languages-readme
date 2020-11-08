@@ -19,6 +19,8 @@ commit_message = os.getenv("INPUT_COMMIT_MESSAGE")
 done_block = os.getenv("INPUT_DONE_BLOCK")
 empty_block = os.getenv("INPUT_EMPTY_BLOCK")
 list_count = int(os.getenv("INPUT_LIST_COUNT"))
+hide_size = os.getenv("INPUT_HIDE_SIZE") == "true"
+bar_width = int(os.getenv("INPUT_BAR_WIDTH"))
 
 
 def formatWithIEC(sz: float):
@@ -105,12 +107,13 @@ def get_stats():
         percent = 100.0 * size / size_total
 
         fmt_name = lang + (" " * (pad_name - len(lang)))
-        fmt_size = formatWithIEC(size)
-        fmt_size = (" " * (pad_size - len(fmt_size))) + fmt_size
+        if hide_size:
+            fmt_size = ""
+        else:
+            fmt_size = formatWithIEC(size)
+            fmt_size = (" " * (pad_size - len(fmt_size))) + fmt_size
         fmt_bar = round(percent)
-        fmt_bar = (
-            f"{done_block * int(fmt_bar / 4)}{empty_block * int(25 - int(fmt_bar / 4))}"
-        )
+        fmt_bar = f"{done_block * int(bar_width / 100.0 * fmt_bar)}{empty_block * int(bar_width - int(bar_width / 100.0 * fmt_bar))}"
         fmt_percent = format(percent, "0.2f").rjust(5)
 
         data_list.append(f"{fmt_name}   {fmt_size} {fmt_bar} {fmt_percent} %")

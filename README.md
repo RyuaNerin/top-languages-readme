@@ -113,11 +113,13 @@ jobs:
         steps:
         - uses: ryuanerin/top-languages-readme@master
           with:
-            USERNAME: <username> # Optional
-            COMMIT_MESSAGE: "Updated the Graph with new Metrics"    # Optional
-            DONE_BLOCK:  "█" # Optional
-            EMPTY_BLOCK: "░" # Optional
-            LIST_COUNT:  10  # Optional
+            COMMIT_MESSAGE: "Updated the Graph with new Metrics" # Optional
+            USERNAME:     <username>    # Optional
+            DONE_BLOCK:   "█"           # Optional
+            EMPTY_BLOCK:  "░"           # Optional
+            LIST_COUNT:   10            # Optional
+            HIDE_SIZE:    false         # Optional
+            BAR_WIDTH:    25            # Optional
 ```
 
 - default option

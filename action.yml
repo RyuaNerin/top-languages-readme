@@ -5,8 +5,8 @@ description: 'Add development language usage statistics on your Profile Readme'
 inputs:
   GH_TOKEN:
     description: 'GitHub access token with Repo scope'
-    required: true
     default: ${{ github.token }}
+    required: true
 
   USERNAME:
     description: 'Your GitHub username'
@@ -31,6 +31,16 @@ inputs:
   LIST_COUNT:
     description: "Number of lists to display"
     default: 10
+    required: false
+
+  HIDE_SIZE:
+    description: "Hide the number of characters per language."
+    default: true
+    required: false
+
+  BAR_WIDTH:
+    description: "Hide the number of characters per language."
+    default: 25
     required: false
 
 
