@@ -21,6 +21,27 @@ empty_block = os.getenv("INPUT_EMPTY_BLOCK")
 list_count = int(os.getenv("INPUT_LIST_COUNT"))
 
 
+def formatWithIEC(sz: float):
+    iec = [
+        "B  ",
+        "KiB",
+        "MiB",
+        "GiB",
+        "TiB",
+        "PiB",
+        "EiB",
+        "ZiB",
+        "YiB",
+    ]
+
+    i = 0
+    while sz >= 1000 and i < len(iec) - 1:
+        sz = sz / 1024.0
+        i += 1
+
+    return f"{sz:.2f} {iec[i]}"
+
+
 def get_stats():
     repo_list: typing.List[str] = []
 
@@ -55,43 +76,43 @@ def get_stats():
             raise e
 
     langs: typing.Dict[str, int] = defaultdict(int)
-    lines_all = 0
+    size_total = 0
 
     for repo in repo_list:
         data = requests.get(
             f"https://api.github.com/repos/{repo}/languages", headers=headers
         ).json()
         for lang in data:
-            lines = data[lang]
-            langs[lang] += lines
-            lines_all += lines
+            size = data[lang]
+            langs[lang] += size
+            size_total += size
 
     langs: typing.List[typing.Tuple[str, int]] = list(
         sorted(langs.items(), key=lambda x: x[1], reverse=True)
     )[:list_count]
 
     pad_name = len(max([x[0] for x in langs], key=len))
-    pad_lines = len(max([f"{x[1]:,}" for x in langs], key=len))
+    pad_size = len(max([formatWithIEC(x[1]) for x in langs], key=len))
 
     data_list = []
-    for (lang, lines) in langs:
+    for (lang, size) in langs:
         """
-            ___             _                      _
-        C#     153,153 bytes |||||||||||||||||||    80.00 %
-        Java    12,345 bytes ||||||||||              8.12 %
+            ___           _                     _
+        C#      153.00 MiB |||||||||||||||||||   80.00 %
+        Java     22.50 KiB ||||||||||             8.12 %
         """
-        percent = 100.0 * lines / lines_all
+        percent = 100.0 * size / size_total
 
         fmt_name = lang + (" " * (pad_name - len(lang)))
-        fmt_lines = f"{lines:,}"
-        fmt_lines = (" " * (pad_lines - len(fmt_lines))) + fmt_lines
+        fmt_size = formatWithIEC(size)
+        fmt_size = (" " * (pad_size - len(fmt_size))) + fmt_size
         fmt_bar = round(percent)
         fmt_bar = (
             f"{done_block * int(fmt_bar / 4)}{empty_block * int(25 - int(fmt_bar / 4))}"
         )
         fmt_percent = format(percent, "0.2f").rjust(5)
 
-        data_list.append(f"{fmt_name}   {fmt_lines} bytes {fmt_bar} {fmt_percent} %")
+        data_list.append(f"{fmt_name}   {fmt_size} {fmt_bar} {fmt_percent} %")
 
     print("Graph Generated")
     data = "\n".join(data_list)
