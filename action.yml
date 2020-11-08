@@ -1,0 +1,43 @@
+name: 'Top-Languages - Readme'
+author: RyuaNerin
+description: 'Add top most langauges in your Readme'
+
+inputs:
+  GH_TOKEN:
+    description: 'GitHub access token with Repo scope'
+    required: true
+    default: ${{ github.token }}
+
+  USERNAME:
+    description: 'Your GitHub username'
+    default: ${{ github.repository_owner }}
+    required: false
+    
+  COMMIT_MESSAGE:
+    description: "Add a commit message of your choice"
+    default: "Updated the Graph with new Metrics"
+    required: false
+    
+  DONE_BLOCK:
+    description: "Done block character"
+    default: "█"
+    required: false
+    
+  EMPTY_BLOCK:
+    description: "Empty block character"
+    default: "░"
+    required: false
+
+  LIST_COUNT:
+    description: "Number of lists to display"
+    default: 10
+    required: false
+
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+branding:
+  icon: 'info'
+  color: 'blue'

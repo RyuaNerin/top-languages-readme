@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+certifi = "==2020.6.20"
+chardet = "==3.0.4"
+idna = "==2.10"
+requests = "==2.24.0"
+urllib3 = "==1.25.11"
+wrapt = "==1.12.1"
+Deprecated = "==1.2.10"
+PyGithub = "==1.53"
+PyJWT = "==1.7.1"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
