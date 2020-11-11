@@ -114,40 +114,31 @@ jobs:
         - uses: ryuanerin/top-languages-readme@master
           with:
             COMMIT_MESSAGE: "Updated the Graph with new Metrics" # Optional
-            USERNAME:     <username>    # Optional
-            DONE_BLOCK:   "█"           # Optional
-            EMPTY_BLOCK:  "░"           # Optional
-            LIST_COUNT:   10            # Optional
-            HIDE_SIZE:    false         # Optional
-            BAR_WIDTH:    25            # Optional
+            USERNAME: <username> # Optional
+            LINE_FORMAT: "$NAME   $SIZE $BAR  $PERCENT" # Optional
+            LIST_COUNT: 10 # Optional
+            BLOCKS: "░█" # Optional
+            BAR_WIDTH: 25 # Optional
+            SHOW_TOTAL: false # Optional
+            TOP_TOTAL: false # Optional
+            SHOW_TOTAL_SEPARATOR: true # Optional
 ```
 
-- default option
+- BLOCKS styles:
 
-    ```txt
-    C#                   3.61 MiB ███████████░░░░░░░░░░░░░  44.38 %
-    JavaScript           1.01 MiB ███░░░░░░░░░░░░░░░░░░░░░  12.35 %
-    Go                 973.63 KiB ███░░░░░░░░░░░░░░░░░░░░░  11.69 %
-    CSS                739.71 KiB ██░░░░░░░░░░░░░░░░░░░░░░   8.88 %
-    HTML               637.18 KiB ██░░░░░░░░░░░░░░░░░░░░░░   7.65 %
-    Java               522.66 KiB █░░░░░░░░░░░░░░░░░░░░░░░   6.27 %
-    Python             257.42 KiB ░░░░░░░░░░░░░░░░░░░░░░░░   3.09 %
-    C++                204.07 KiB ░░░░░░░░░░░░░░░░░░░░░░░░   2.45 %
-    PHP                149.97 KiB ░░░░░░░░░░░░░░░░░░░░░░░░   1.80 %
-    Jupyter Notebook    61.82 KiB ░░░░░░░░░░░░░░░░░░░░░░░░   0.74 %
-    ```
+    - default : `░█`
 
-- if set EMPTY_BLOCK to '` `'
-
-    ```txt
-    C#                   3.61 MiB ███████████               44.38 %
-    JavaScript           1.01 MiB ███                       12.35 %
-    Go                 973.63 KiB ███                       11.69 %
-    CSS                739.71 KiB ██                         8.88 %
-    HTML               637.18 KiB ██                         7.65 %
-    Java               522.66 KiB █                          6.27 %
-    Python             257.42 KiB                            3.09 %
-    C++                204.07 KiB                            2.45 %
-    PHP                149.97 KiB                            1.80 %
-    Jupyter Notebook    61.82 KiB                            0.74 %
-    ```
+    |BLOCKS|default|example (55.5%)|
+    |-|:-:|-|
+    |` █`||`██████    `|
+    |`░█`||`██████░░░░`|
+    |`░▒▓█`||`█████▓░░░░`|
+    |`⣀⣄⣤⣦⣶⣷⣿`||`⣿⣿⣿⣿⣿⣶⣀⣀⣀⣀`|
+    |`⣀⣄⣆⣇⣧⣷⣿`||`⣿⣿⣿⣿⣿⣧⣀⣀⣀⣀`|
+    |`▁▂▃▄▅▆▇█`||`█████▅▁▁▁▁`|
+    |`▏▎▍▌▋▊▉█`||`█████▋▏▏▏▏`|
+    |`○◔◐◕⬤`||`⬤⬤⬤⬤⬤◕○○○○`|
+    |`□◱◧▣■`||`■■■■■▣□□□□`|
+    |`□◱▨▩■`||`■■■■■▩□□□□`|
+    |`□▨▩■`||`■■■■■▩□□□□`|
+    |`□◱▥▦■`||`■■■■■▦□□□□`|

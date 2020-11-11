@@ -1,3 +1,5 @@
+#!/bin/python
+
 import base64
 import os
 import re
@@ -12,15 +14,25 @@ END_COMMENT = "<!--END_SECTION:top_language-->"
 listReg = f"{START_COMMENT}[\\s\\S]+{END_COMMENT}"
 
 owner = os.getenv("INPUT_USERNAME")
+ghtoken_default = os.getenv("INPUT_GH_TOKEN_DEFAULT")
 ghtoken = os.getenv("INPUT_GH_TOKEN")
 
 commit_message = os.getenv("INPUT_COMMIT_MESSAGE")
 
-done_block = os.getenv("INPUT_DONE_BLOCK")
-empty_block = os.getenv("INPUT_EMPTY_BLOCK")
 list_count = int(os.getenv("INPUT_LIST_COUNT"))
-hide_size = os.getenv("INPUT_HIDE_SIZE") == "true"
+
+line_format = os.getenv("INPUT_LINE_FORMAT")
+blocks = os.getenv("INPUT_BLOCKS")
 bar_width = int(os.getenv("INPUT_BAR_WIDTH"))
+show_total = os.getenv("INPUT_SHOW_TOTAL") == "true"
+show_total_top = os.getenv("INPUT_TOP_TOTAL") == "true"
+show_total_separator = os.getenv("INPUT_SHOW_TOTAL_SEPARATOR") == "true"
+
+if blocks == "":
+    blocks = os.getenv("INPUT_EMPTY_BLOCK") + os.getenv("INPUT_DONE_BLOCK")
+
+
+one_block_percent = 100.0 / bar_width
 
 
 def formatWithIEC(sz: float):
@@ -42,6 +54,18 @@ def formatWithIEC(sz: float):
         i += 1
 
     return f"{sz:.2f} {iec[i]}"
+
+
+def gen_bar(percent: int, blocks: str):
+    fmt_bar_left = blocks[-1] * int(percent / one_block_percent)
+    fmt_bar_mid = (
+        blocks[0]
+        if len(blocks) == 2
+        else blocks[
+            int((percent % one_block_percent) / (one_block_percent / (len(blocks) - 1)))
+        ]
+    )
+    return (fmt_bar_left + fmt_bar_mid).ljust(bar_width, blocks[0])
 
 
 def get_stats():
@@ -94,29 +118,54 @@ def get_stats():
         sorted(langs.items(), key=lambda x: x[1], reverse=True)
     )[:list_count]
 
-    pad_name = len(max([x[0] for x in langs], key=len))
-    pad_size = len(max([formatWithIEC(x[1]) for x in langs], key=len))
+    if show_total:
+        if show_total_top:
+            langs.insert(0, ("TOTAL", size_total))
+        else:
+            langs.append(("TOTAL", size_total))
 
-    data_list = []
+    pad_name = max([len(x[0]) for x in langs])
+    pad_size = max([len(formatWithIEC(x[1])) for x in langs])
+
+    data_list: typing.List[str] = []
     for (lang, size) in langs:
         """
-            ___           _                     _
-        C#      153.00 MiB |||||||||||||||||||   80.00 %
-        Java     22.50 KiB ||||||||||             8.12 %
+        `````___``````````_`````````````````````_````````
+        C#   |||153.00 MiB|===================  | 80.00 %
+        Java ||| 22.50 KiB|==========           |  8.12 %
+        ------------------|---------------------|-------
+        TOTAL|||xxx.xx MiB|                     |100.00 %
         """
         percent = 100.0 * size / size_total
 
-        fmt_name = lang + (" " * (pad_name - len(lang)))
-        if hide_size:
-            fmt_size = ""
-        else:
-            fmt_size = formatWithIEC(size)
-            fmt_size = (" " * (pad_size - len(fmt_size))) + fmt_size
-        fmt_bar = round(percent)
-        fmt_bar = f"{done_block * int(bar_width / 100.0 * fmt_bar)}{empty_block * int(bar_width - int(bar_width / 100.0 * fmt_bar))}"
-        fmt_percent = format(percent, "0.2f").rjust(5)
+        fmt_name = lang.ljust(pad_name, " ")
+        fmt_size = formatWithIEC(size).rjust(pad_size, " ")
+        fmt_percent = format(percent, "0.2f").rjust(6) + " %"
 
-        data_list.append(f"{fmt_name}   {fmt_size} {fmt_bar} {fmt_percent} %")
+        fmt_bar = gen_bar(percent, blocks)
+
+        if lang == "TOTAL":
+            if show_total_separator and not show_total_top:
+                data_list.append("-" * max([len(x) for x in data_list]))
+            fmt_bar = blocks[-1] * bar_width
+
+        data_list.append(
+            line_format.replace("$NAME", fmt_name)
+            .replace("$SIZE", fmt_size)
+            .replace("$BAR", fmt_bar)
+            .replace("$PERCENT", fmt_percent)
+        )
+
+        if lang == "TOTAL":
+            if show_total_separator and show_total_top:
+                data_list.append("-" * max([len(x) for x in data_list]))
+
+    if show_total:
+        """
+            ___           _                     __
+        C#      153.00 MiB |||||||||||||||||||    80.00 %
+        Java     22.50 KiB ||||||||||              8.12 %
+        """
 
     print("Graph Generated")
     data = "\n".join(data_list)
@@ -125,7 +174,7 @@ def get_stats():
 
 
 if __name__ == "__main__":
-    g = Github(ghtoken)
+    g = Github(ghtoken_default)
 
     repo = g.get_repo(f"{owner}/{owner}")
 
