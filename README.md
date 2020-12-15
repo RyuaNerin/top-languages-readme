@@ -1,4 +1,4 @@
-# Top-Langauges - Readme
+# Top-Languages - Readme
 
 ![preview](README.png)
 
