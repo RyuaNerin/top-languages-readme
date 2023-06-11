@@ -20,7 +20,7 @@ inputs:
 
   COMMIT_MESSAGE:
     description: "Add a commit message of your choice"
-    default: "Updated the Graph with new Metrics on"
+    default: "Update README on"
     required: false
 
   LIST_COUNT:
