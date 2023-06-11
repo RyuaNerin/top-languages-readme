@@ -10,6 +10,7 @@ import requests
 from github import Github
 
 # Include variables in the readme so that every commit can be "unique"
+# They can be expanded as your wish
 
 # Start the variable script
 input_string = os.getenv("INPUT_COMMIT_MESSAGE")
@@ -34,14 +35,15 @@ placeholders = {
     "day_name": day_name,
     "day_no": day_no,
     "minute": minute,
-	"hour": hour,
+    "hour": hour,
     "username": my_username,
 }
 
 # Iterate over the placeholders and replace them in the input string
+
+u_message = input_string
 for placeholder, value in placeholders.items():
-    if f"``{placeholder}``" in input_string:
-        u_message = input_string.replace(f"``{placeholder}``", value)
+    u_message = input_string.replace(f"``{placeholder}``", str(value))
 
 # End the variable script
 
