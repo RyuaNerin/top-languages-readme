@@ -15,10 +15,28 @@ from github import Github
 # Start the variable script
 input_string = os.getenv("INPUT_COMMIT_MESSAGE")
 current_date = datetime.datetime.now().strftime("%a %d %b %Y %H:%M:%S %Z")
+now = datetime.datetime.now()
+
+year = now.year
+month_no = now.month
+month_name = now.strftime("%B")
+day_no = now.day
+day_name = now.strftime("%A")
+minute = now.minute
+hour = now.hour
+my_username = os.getenv("INPUT_USERNAME")
 
 # Define a dictionary with placeholders and their corresponding values
 placeholders = {
-    "date": current_date
+    "date": current_date,
+    "year": year,
+    "month_name": month_name,
+    "month_no": month_no,
+    "day_name": day_name,
+    "day_no": day_no,
+    "minute": minute,
+	"hour": hour,
+    "username": my_username,
 }
 
 # Iterate over the placeholders and replace them in the input string
