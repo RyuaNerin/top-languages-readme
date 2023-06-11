@@ -1,4 +1,4 @@
 #generated when running the tests
 __pycache__/
 .env/
-.vscode/launch.json
+.vscode/*
