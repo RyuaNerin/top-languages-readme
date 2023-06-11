@@ -19,15 +19,17 @@ inputs:
 		required: false
 
 	COMMIT_MESSAGE:
-		description: "Add a commit message of your choice"
-		default: |
-						docs(readme): Update README with ``username``'s statistics
+  description: "Add a commit message of your choice"
+  default: |
+    docs(readme): 
+    Update README with ``username``'s statistics
 
-						Update the  README file to include current statistics generated on ``date``.
+    Update the README file to include current statistics generated on ``date``.
 
-						Committed by <github-action[bot]> on behalf of <``username``>.
+    Committed by <github-action[bot]> on behalf of <``username``>.
 
-		required: false
+  required: false
+
 
 	LIST_COUNT:
 		description: "Number of lists to display"
