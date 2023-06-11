@@ -65,7 +65,8 @@ def gen_bar(percent: int, blocks: str):
         blocks[0]
         if len(blocks) == 2
         else blocks[
-            int((percent % one_block_percent) / (one_block_percent / (len(blocks) - 1)))
+            int((percent % one_block_percent) /
+                (one_block_percent / (len(blocks) - 1)))
         ]
     )
     return (fmt_bar_left + fmt_bar_mid).ljust(bar_width, blocks[0])
