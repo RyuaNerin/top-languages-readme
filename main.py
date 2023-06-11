@@ -17,9 +17,7 @@ input_string = os.getenv("INPUT_COMMIT_MESSAGE")
 current_date = datetime.datetime.now().strftime("%a %d %b %Y %H:%M:%S %Z")
 
 # Define a dictionary with placeholders and their corresponding values
-placeholders = {
-    "date": current_date
-}
+placeholders = {"date": current_date}
 
 # Iterate over the placeholders and replace them in the input string
 for placeholder, value in placeholders.items():
@@ -74,9 +72,13 @@ def formatWithIEC(sz: float):
 
 def gen_bar(percent: int, blocks: str):
     fmt_bar_left = blocks[-1] * int(percent / one_block_percent)
-    fmt_bar_mid = (blocks[0] if len(blocks) == 2 else blocks[int(
-        (percent % one_block_percent) / (one_block_percent /
-                                         (len(blocks) - 1)))])
+    fmt_bar_mid = (
+        blocks[0]
+        if len(blocks) == 2
+        else blocks[
+            int((percent % one_block_percent) / (one_block_percent / (len(blocks) - 1)))
+        ]
+    )
     return (fmt_bar_left + fmt_bar_mid).ljust(bar_width, blocks[0])
 
 
@@ -118,15 +120,17 @@ def get_stats():
     size_total = 0
 
     for repo in repo_list:
-        data = requests.get(f"https://api.github.com/repos/{repo}/languages",
-                            headers=headers).json()
+        data = requests.get(
+            f"https://api.github.com/repos/{repo}/languages", headers=headers
+        ).json()
         for lang in data:
             size = data[lang]
             langs[lang] += size
             size_total += size
 
     langs: typing.List[typing.Tuple[str, int]] = list(
-        sorted(langs.items(), key=lambda x: x[1], reverse=True))[:list_count]
+        sorted(langs.items(), key=lambda x: x[1], reverse=True)
+    )[:list_count]
 
     if show_total:
         if show_total_top:
@@ -160,10 +164,11 @@ def get_stats():
             fmt_bar = blocks[-1] * bar_width
 
         data_list.append(
-            line_format.replace("$NAME",
-                                fmt_name).replace("$SIZE", fmt_size).replace(
-                                    "$BAR",
-                                    fmt_bar).replace("$PERCENT", fmt_percent))
+            line_format.replace("$NAME", fmt_name)
+            .replace("$SIZE", fmt_size)
+            .replace("$BAR", fmt_bar)
+            .replace("$PERCENT", fmt_percent)
+        )
 
         if lang == "TOTAL":
             if show_total_separator and show_total_top:
@@ -191,8 +196,9 @@ if __name__ == "__main__":
 
     content = repo.get_readme()
     old_readme = str(base64.b64decode(content.content), "utf-8")
-    new_readme = re.sub(listReg, f"{START_COMMENT}\n{stat_str}\n{END_COMMENT}",
-                        old_readme)
+    new_readme = re.sub(
+        listReg, f"{START_COMMENT}\n{stat_str}\n{END_COMMENT}", old_readme
+    )
     if new_readme != old_readme:
         repo.update_file(
             branch="master",
