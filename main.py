@@ -9,7 +9,6 @@ from collections import defaultdict
 import requests
 from github import Github
 
-
 # Include variables in the readme so that every commit can be "unique"
 
 # Start the variable script
