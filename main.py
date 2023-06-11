@@ -10,6 +10,7 @@ import requests
 from github import Github
 
 # Include variables in the readme so that every commit can be "unique"
+# They can be expanded as your wish
 
 # Start the variable script
 input_string = os.getenv("INPUT_COMMIT_MESSAGE")
