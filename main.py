@@ -1,11 +1,11 @@
 #!/bin/python
 
 import base64
+import datetime
 import os
 import re
 import typing
 from collections import defaultdict
-import datetime
 
 import requests
 from github import Github
