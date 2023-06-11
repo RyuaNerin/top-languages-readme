@@ -20,7 +20,13 @@ inputs:
 
   COMMIT_MESSAGE:
     description: "Add a commit message of your choice"
-    default: "Update README on ``date``"
+    default: |
+            docs(readme): Update README with ``username``'s statistics
+
+		        Update the  README file to include current statistics generated on ``date``.
+
+		        Committed by <github-action[bot]> on behalf of <``username``>.
+
     required: false
 
   LIST_COUNT:
