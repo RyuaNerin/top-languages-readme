@@ -3,81 +3,81 @@ author: RyuaNerin
 description: "Add development language usage statistics on your Profile Readme"
 
 inputs:
-  GH_TOKEN_DEFAULT:
-    description: "GitHub access token with Repo scope (for commit and push)"
-    default: ${{ github.token }}
-    required: true
+	GH_TOKEN_DEFAULT:
+		description: "GitHub access token with Repo scope (for commit and push)"
+		default: ${{ github.token }}
+		required: true
 
-  GH_TOKEN:
-    description: "GitHub access token with Repo scope (for access private repository)"
-    default: ${{ github.token }}
-    required: true
+	GH_TOKEN:
+		description: "GitHub access token with Repo scope (for access private repository)"
+		default: ${{ github.token }}
+		required: true
 
-  USERNAME:
-    description: "Your GitHub username"
-    default: ${{ github.repository_owner }}
-    required: false
+	USERNAME:
+		description: "Your GitHub username"
+		default: ${{ github.repository_owner }}
+		required: false
 
-  COMMIT_MESSAGE:
-    description: "Add a commit message of your choice"
-    default: |
-            docs(readme): Update README with ``username``'s statistics
+	COMMIT_MESSAGE:
+		description: "Add a commit message of your choice"
+		default: |
+						docs(readme): Update README with ``username``'s statistics
 
-		        Update the  README file to include current statistics generated on ``date``.
+						Update the  README file to include current statistics generated on ``date``.
 
-		        Committed by <github-action[bot]> on behalf of <``username``>.
+						Committed by <github-action[bot]> on behalf of <``username``>.
 
-    required: false
+		required: false
 
-  LIST_COUNT:
-    description: "Number of lists to display"
-    default: 10
-    required: false
+	LIST_COUNT:
+		description: "Number of lists to display"
+		default: 10
+		required: false
 
-  LINE_FORMAT:
-    description: "Output format for each line."
-    default: "$NAME   $SIZE $BAR  $PERCENT"
-    required: false
+	LINE_FORMAT:
+		description: "Output format for each line."
+		default: "$NAME   $SIZE $BAR  $PERCENT"
+		required: false
 
-  BLOCKS:
-    description: "block character list (read README.md)"
-    default: ""
-    required: true
+	BLOCKS:
+		description: "block character list (read README.md)"
+		default: ""
+		required: true
 
-  EMPTY_BLOCK:
-    description: "Empty block character"
-    default: "░"
-    required: false
+	EMPTY_BLOCK:
+		description: "Empty block character"
+		default: "░"
+		required: false
 
-  DONE_BLOCK:
-    description: "Done block character"
-    default: "█"
-    required: false
+	DONE_BLOCK:
+		description: "Done block character"
+		default: "█"
+		required: false
 
-  BAR_WIDTH:
-    description: "Bar width"
-    default: 25
-    required: false
+	BAR_WIDTH:
+		description: "Bar width"
+		default: 25
+		required: false
 
-  SHOW_TOTAL:
-    description: "Display the total"
-    default: false
-    required: false
+	SHOW_TOTAL:
+		description: "Display the total"
+		default: false
+		required: false
 
-  TOP_TOTAL:
-    description: "Display the total on top"
-    default: false
-    required: false
+	TOP_TOTAL:
+		description: "Display the total on top"
+		default: false
+		required: false
 
-  SHOW_TOTAL_SEPARATOR:
-    description: "Display the total with separator"
-    default: true
-    required: false
+	SHOW_TOTAL_SEPARATOR:
+		description: "Display the total with separator"
+		default: true
+		required: false
 
 runs:
-  using: "docker"
-  image: "Dockerfile"
+	using: "docker"
+	image: "Dockerfile"
 
 branding:
-  icon: "info"
-  color: "blue"
+	icon: "info"
+	color: "blue"
