@@ -18,7 +18,7 @@ ghtoken_default = os.getenv("INPUT_GH_TOKEN_DEFAULT")
 ghtoken = os.getenv("INPUT_GH_TOKEN")
 
 commit_message = os.getenv("INPUT_COMMIT_MESSAGE")
-current_time = datetime.datetime.now().strftime("%a %d %b %Y %I:%M:%S %p %Z")
+current_time = datetime.datetime.now().strftime("%a %d %b %Y %H:%M:%S %Z")
 u_message = commit_message + " " + current_time
 
 list_count = int(os.getenv("INPUT_LIST_COUNT"))
