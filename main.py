@@ -5,6 +5,7 @@ import os
 import re
 import typing
 from collections import defaultdict
+import datetime
 
 import requests
 from github import Github
@@ -18,6 +19,8 @@ ghtoken_default = os.getenv("INPUT_GH_TOKEN_DEFAULT")
 ghtoken = os.getenv("INPUT_GH_TOKEN")
 
 commit_message = os.getenv("INPUT_COMMIT_MESSAGE")
+current_time = datetime.datetime.now().strftime("%a %d %b %Y %I:%M:%S %p %Z")
+u_message = commit_message + " " + current_time
 
 list_count = int(os.getenv("INPUT_LIST_COUNT"))
 
@@ -190,6 +193,6 @@ if __name__ == "__main__":
             branch="master",
             path=content.path,
             sha=content.sha,
-            message=commit_message,
+            message=u_message,
             content=new_readme,
         )

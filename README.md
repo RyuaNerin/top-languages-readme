@@ -34,7 +34,7 @@ Did not need to fork this repository.
             name: Update this repo's README
             runs-on: ubuntu-latest
             steps:
-            - uses: ryuanerin/top-languages-readme@master
+            - uses: gekkowrld/langs-readme@gekkowrld
     ```
 
 1. Add a comment to your README.md like this:
@@ -90,7 +90,7 @@ Did not need to fork this repository.
             name: Update this repo's README
             runs-on: ubuntu-latest
             steps:
-            - uses: ryuanerin/top-languages-readme@master
+            - uses: gekkowrld/langs-readme@gekkowrld
               with:
                 GH_TOKEN: ${{ secrets.GH_TOKEN }}
     ```
@@ -111,9 +111,8 @@ jobs:
         name: Update this repo's README
         runs-on: ubuntu-latest
         steps:
-        - uses: ryuanerin/top-languages-readme@master
+        - uses: gekkowrld/langs-readme@gekkowrld
           with:
-            COMMIT_MESSAGE: "Updated the Graph with new Metrics" # Optional
             USERNAME: <username> # Optional
             LINE_FORMAT: "$NAME   $SIZE $BAR  $PERCENT" # Optional
             LIST_COUNT: 10 # Optional
