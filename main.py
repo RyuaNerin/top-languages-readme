@@ -1,11 +1,10 @@
 #!/bin/python
-
 import base64
+import datetime
 import os
 import re
 import typing
 from collections import defaultdict
-import datetime
 
 import requests
 from github import Github
@@ -34,7 +33,6 @@ show_total_separator = os.getenv("INPUT_SHOW_TOTAL_SEPARATOR") == "true"
 if blocks == "":
     blocks = os.getenv("INPUT_EMPTY_BLOCK") + os.getenv("INPUT_DONE_BLOCK")
 
-
 one_block_percent = 100.0 / bar_width
 
 
@@ -61,13 +59,9 @@ def formatWithIEC(sz: float):
 
 def gen_bar(percent: int, blocks: str):
     fmt_bar_left = blocks[-1] * int(percent / one_block_percent)
-    fmt_bar_mid = (
-        blocks[0]
-        if len(blocks) == 2
-        else blocks[
-            int((percent % one_block_percent) / (one_block_percent / (len(blocks) - 1)))
-        ]
-    )
+    fmt_bar_mid = (blocks[0] if len(blocks) == 2 else blocks[int(
+        (percent % one_block_percent) / (one_block_percent /
+                                         (len(blocks) - 1)))])
     return (fmt_bar_left + fmt_bar_mid).ljust(bar_width, blocks[0])
 
 
@@ -109,17 +103,15 @@ def get_stats():
     size_total = 0
 
     for repo in repo_list:
-        data = requests.get(
-            f"https://api.github.com/repos/{repo}/languages", headers=headers
-        ).json()
+        data = requests.get(f"https://api.github.com/repos/{repo}/languages",
+                            headers=headers).json()
         for lang in data:
             size = data[lang]
             langs[lang] += size
             size_total += size
 
     langs: typing.List[typing.Tuple[str, int]] = list(
-        sorted(langs.items(), key=lambda x: x[1], reverse=True)
-    )[:list_count]
+        sorted(langs.items(), key=lambda x: x[1], reverse=True))[:list_count]
 
     if show_total:
         if show_total_top:
@@ -131,7 +123,7 @@ def get_stats():
     pad_size = max([len(formatWithIEC(x[1])) for x in langs])
 
     data_list: typing.List[str] = []
-    for (lang, size) in langs:
+    for lang, size in langs:
         """
         `````___``````````_`````````````````````_````````
         C#   |||153.00 MiB|===================  | 80.00 %
@@ -153,11 +145,10 @@ def get_stats():
             fmt_bar = blocks[-1] * bar_width
 
         data_list.append(
-            line_format.replace("$NAME", fmt_name)
-            .replace("$SIZE", fmt_size)
-            .replace("$BAR", fmt_bar)
-            .replace("$PERCENT", fmt_percent)
-        )
+            line_format.replace("$NAME",
+                                fmt_name).replace("$SIZE", fmt_size).replace(
+                                    "$BAR",
+                                    fmt_bar).replace("$PERCENT", fmt_percent))
 
         if lang == "TOTAL":
             if show_total_separator and show_total_top:
@@ -185,9 +176,8 @@ if __name__ == "__main__":
 
     content = repo.get_readme()
     old_readme = str(base64.b64decode(content.content), "utf-8")
-    new_readme = re.sub(
-        listReg, f"{START_COMMENT}\n{stat_str}\n{END_COMMENT}", old_readme
-    )
+    new_readme = re.sub(listReg, f"{START_COMMENT}\n{stat_str}\n{END_COMMENT}",
+                        old_readme)
     if new_readme != old_readme:
         repo.update_file(
             branch="master",

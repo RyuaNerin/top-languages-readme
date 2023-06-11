@@ -1,20 +1,20 @@
-name: 'Top-Languages - Readme'
+name: "Top-Languages - Readme"
 author: RyuaNerin
-description: 'Add development language usage statistics on your Profile Readme'
+description: "Add development language usage statistics on your Profile Readme"
 
 inputs:
   GH_TOKEN_DEFAULT:
-    description: 'GitHub access token with Repo scope (for commit and push)'
+    description: "GitHub access token with Repo scope (for commit and push)"
     default: ${{ github.token }}
     required: true
 
   GH_TOKEN:
-    description: 'GitHub access token with Repo scope (for access private repository)'
+    description: "GitHub access token with Repo scope (for access private repository)"
     default: ${{ github.token }}
     required: true
 
   USERNAME:
-    description: 'Your GitHub username'
+    description: "Your GitHub username"
     default: ${{ github.repository_owner }}
     required: false
 
@@ -68,11 +68,10 @@ inputs:
     default: true
     required: false
 
-
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"
 
 branding:
-  icon: 'info'
-  color: 'blue'
+  icon: "info"
+  color: "blue"
