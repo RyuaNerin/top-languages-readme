@@ -9,6 +9,25 @@ from collections import defaultdict
 import requests
 from github import Github
 
+
+# Include variables in the readme so that every commit can be "unique"
+
+# Start the variable script
+input_string = os.getenv("INPUT_COMMIT_MESSAGE")
+current_date = datetime.datetime.now().strftime("%a %d %b %Y %H:%M:%S %Z")
+
+# Define a dictionary with placeholders and their corresponding values
+placeholders = {
+    "date": current_date
+}
+
+# Iterate over the placeholders and replace them in the input string
+for placeholder, value in placeholders.items():
+    if f"``{placeholder}``" in input_string:
+        u_message = input_string.replace(f"``{placeholder}``", value)
+
+# End the variable script
+
 START_COMMENT = "<!--START_SECTION:top_language-->"
 END_COMMENT = "<!--END_SECTION:top_language-->"
 listReg = f"{START_COMMENT}[\\s\\S]+{END_COMMENT}"
@@ -16,10 +35,6 @@ listReg = f"{START_COMMENT}[\\s\\S]+{END_COMMENT}"
 owner = os.getenv("INPUT_USERNAME")
 ghtoken_default = os.getenv("INPUT_GH_TOKEN_DEFAULT")
 ghtoken = os.getenv("INPUT_GH_TOKEN")
-
-commit_message = os.getenv("INPUT_COMMIT_MESSAGE")
-current_time = datetime.datetime.now().strftime("%a %d %b %Y %H:%M:%S %Z")
-u_message = commit_message + " " + current_time
 
 list_count = int(os.getenv("INPUT_LIST_COUNT"))
 

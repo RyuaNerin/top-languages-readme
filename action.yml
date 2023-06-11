@@ -20,7 +20,7 @@ inputs:
 
   COMMIT_MESSAGE:
     description: "Add a commit message of your choice"
-    default: "Update README on"
+    default: "Update README on ``date``"
     required: false
 
   LIST_COUNT:
