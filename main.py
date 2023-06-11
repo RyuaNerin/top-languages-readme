@@ -14,9 +14,11 @@ from github import Github
 
 # Start the variable script
 input_string = os.getenv("INPUT_COMMIT_MESSAGE")
-current_date = datetime.datetime.now().strftime("%a %d %b %Y %H:%M:%S %Z")
 now = datetime.datetime.now()
+current_date = now.strftime("%a %d %b %Y %H:%M:%S")
 
+full_year = now.strftime("%d %b %Y")
+full_time = now.strftime("%a %H:%M:%S")
 year = now.year
 month_no = now.month
 month_name = now.strftime("%B")
@@ -37,6 +39,8 @@ placeholders = {
     "minute": minute,
     "hour": hour,
     "username": my_username,
+    "full_year": full_year,
+    "full_time": full_time,
 }
 
 # Iterate over the placeholders and replace them in the input string
