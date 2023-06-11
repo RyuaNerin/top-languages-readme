@@ -40,10 +40,9 @@ placeholders = {
 }
 
 # Iterate over the placeholders and replace them in the input string
-
 u_message = input_string
 for placeholder, value in placeholders.items():
-    u_message = input_string.replace(f"``{placeholder}``", str(value))
+    u_message = u_message.replace(f"``{placeholder}``", str(value))
 
 # End the variable script
 
