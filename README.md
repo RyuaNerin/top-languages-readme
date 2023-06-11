@@ -20,29 +20,29 @@ Did not need to fork this repository.
 
 1. copy the following code and paste it to your new workflow
 
-    ```yml
-    name: Top-Languages Readme
+   ```yml
+   name: Top-Languages Readme
 
-    on:
-        workflow_dispatch:
-        schedule:
-            # Runs at 12am UTC
-            - cron: '0 0 * * *'
+   on:
+     workflow_dispatch:
+     schedule:
+       # Runs at 12am UTC
+       - cron: "0 0 * * *"
 
-    jobs:
-        update-readme:
-            name: Update this repo's README
-            runs-on: ubuntu-latest
-            steps:
-            - uses: gekkowrld/langs-readme@gekkowrld
-    ```
+   jobs:
+     update-readme:
+       name: Update this repo's README
+       runs-on: ubuntu-latest
+       steps:
+         - uses: gekkowrld/langs-readme@gekkowrld
+   ```
 
 1. Add a comment to your README.md like this:
 
-    ```md
-    <!--START_SECTION:top_language-->
-    <!--END_SECTION:top_language-->
-    ```
+   ```md
+   <!--START_SECTION:top_language-->
+   <!--END_SECTION:top_language-->
+   ```
 
 1. Go to Action menu
 
@@ -60,7 +60,7 @@ Did not need to fork this repository.
 
 1. Copy `token`
 
-    ![token generated](README-1.png)
+   ![token generated](README-1.png)
 
 1. Go to your Profile Readme
 
@@ -76,24 +76,24 @@ Did not need to fork this repository.
 
 1. Edit you workflow file
 
-    ```yml
-    name: Top-Languages Readme
+   ```yml
+   name: Top-Languages Readme
 
-    on:
-        workflow_dispatch:
-        schedule:
-            # Runs at 12am UTC
-            - cron: '0 0 * * *'
+   on:
+     workflow_dispatch:
+     schedule:
+       # Runs at 12am UTC
+       - cron: "0 0 * * *"
 
-    jobs:
-        update-readme:
-            name: Update this repo's README
-            runs-on: ubuntu-latest
-            steps:
-            - uses: gekkowrld/langs-readme@gekkowrld
-              with:
-                GH_TOKEN: ${{ secrets.GH_TOKEN }}
-    ```
+   jobs:
+     update-readme:
+       name: Update this repo's README
+       runs-on: ubuntu-latest
+       steps:
+         - uses: gekkowrld/langs-readme@gekkowrld
+           with:
+             GH_TOKEN: ${{ secrets.GH_TOKEN }}
+   ```
 
 ## With option (Optional)
 
@@ -101,43 +101,43 @@ Did not need to fork this repository.
 name: Top-Languages Readme
 
 on:
-    workflow_dispatch:
-    schedule:
-        # Runs at 12am UTC
-        - cron: '0 0 * * *'
+  workflow_dispatch:
+  schedule:
+    # Runs at 12am UTC
+    - cron: "0 0 * * *"
 
 jobs:
-    update-readme:
-        name: Update this repo's README
-        runs-on: ubuntu-latest
-        steps:
-        - uses: gekkowrld/langs-readme@gekkowrld
-          with:
-            USERNAME: <username> # Optional
-            LINE_FORMAT: "$NAME   $SIZE $BAR  $PERCENT" # Optional
-            LIST_COUNT: 10 # Optional
-            BLOCKS: "░█" # Optional
-            BAR_WIDTH: 25 # Optional
-            SHOW_TOTAL: false # Optional
-            TOP_TOTAL: false # Optional
-            SHOW_TOTAL_SEPARATOR: true # Optional
+  update-readme:
+    name: Update this repo's README
+    runs-on: ubuntu-latest
+    steps:
+      - uses: gekkowrld/langs-readme@gekkowrld
+        with:
+          USERNAME: <username> # Optional
+          LINE_FORMAT: "$NAME   $SIZE $BAR  $PERCENT" # Optional
+          LIST_COUNT: 10 # Optional
+          BLOCKS: "░█" # Optional
+          BAR_WIDTH: 25 # Optional
+          SHOW_TOTAL: false # Optional
+          TOP_TOTAL: false # Optional
+          SHOW_TOTAL_SEPARATOR: true # Optional
 ```
 
 - BLOCKS styles:
 
-    - default : `░█`
+  - default : `░█`
 
-    |BLOCKS|default|example (55.5%)|
-    |-|:-:|-|
-    |` █`|O|`██████    `|
-    |`░█`||`██████░░░░`|
-    |`░▒▓█`||`█████▓░░░░`|
-    |`⣀⣄⣤⣦⣶⣷⣿`||`⣿⣿⣿⣿⣿⣶⣀⣀⣀⣀`|
-    |`⣀⣄⣆⣇⣧⣷⣿`||`⣿⣿⣿⣿⣿⣧⣀⣀⣀⣀`|
-    |`▁▂▃▄▅▆▇█`||`█████▅▁▁▁▁`|
-    |`▏▎▍▌▋▊▉█`||`█████▋▏▏▏▏`|
-    |`○◔◐◕⬤`||`⬤⬤⬤⬤⬤◕○○○○`|
-    |`□◱◧▣■`||`■■■■■▣□□□□`|
-    |`□◱▨▩■`||`■■■■■▩□□□□`|
-    |`□▨▩■`||`■■■■■▩□□□□`|
-    |`□◱▥▦■`||`■■■■■▦□□□□`|
+  | BLOCKS     | default | example (55.5%) |
+  | ---------- | :-----: | --------------- |
+  | ` █`       |    O    | `██████    `    |
+  | `░█`       |         | `██████░░░░`    |
+  | `░▒▓█`     |         | `█████▓░░░░`    |
+  | `⣀⣄⣤⣦⣶⣷⣿`  |         | `⣿⣿⣿⣿⣿⣶⣀⣀⣀⣀`    |
+  | `⣀⣄⣆⣇⣧⣷⣿`  |         | `⣿⣿⣿⣿⣿⣧⣀⣀⣀⣀`    |
+  | `▁▂▃▄▅▆▇█` |         | `█████▅▁▁▁▁`    |
+  | `▏▎▍▌▋▊▉█` |         | `█████▋▏▏▏▏`    |
+  | `○◔◐◕⬤`    |         | `⬤⬤⬤⬤⬤◕○○○○`    |
+  | `□◱◧▣■`    |         | `■■■■■▣□□□□`    |
+  | `□◱▨▩■`    |         | `■■■■■▩□□□□`    |
+  | `□▨▩■`     |         | `■■■■■▩□□□□`    |
+  | `□◱▥▦■`    |         | `■■■■■▦□□□□`    |
