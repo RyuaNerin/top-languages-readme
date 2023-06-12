@@ -10,7 +10,7 @@ from github import Github
 
 exec('options.py')
 
-c_message = options.generate_commit_message(os.getenv("INPUT_COMMIT_MESSAGE"))
+c_message = generate_commit_message(os.getenv("INPUT_COMMIT_MESSAGE"))
 
 START_COMMENT = "<!--START_SECTION:top_language-->"
 END_COMMENT = "<!--END_SECTION:top_language-->"
