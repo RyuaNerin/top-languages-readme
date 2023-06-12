@@ -5,8 +5,8 @@ def generate_commit_message(input_string):
     now = datetime.datetime.now()
     current_date = now.strftime("%a %d %b %Y %H:%M:%S")
 
-    full_year = now.strftime("%d %b %Y")
-    full_time = now.strftime("%a %H:%M:%S")
+    full_year = now.strftime("%a %d %b %Y")
+    full_time = now.strftime("%H:%M:%S")
     year = now.year
     month_no = now.month
     month_name = now.strftime("%B")

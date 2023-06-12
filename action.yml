@@ -25,7 +25,7 @@ inputs:
 
       Update the README file to include current statistics generated on ``full_year`` at ``full_time`` UTC.
 
-      Committed by <github-action[bot]> on behalf of <``username``>.
+      Committed by <github-actions[bot]> on behalf of <``username``>.
 
     required: false
 
