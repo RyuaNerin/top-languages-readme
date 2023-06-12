@@ -1,6 +1,5 @@
 #!/bin/python
 import base64
-import datetime
 import os
 import re
 import typing
