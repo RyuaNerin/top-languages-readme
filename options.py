@@ -1,5 +1,3 @@
-#!/bin/python
-
 import datetime
 import os
 
