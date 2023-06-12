@@ -11,6 +11,8 @@ from github import Github
 
 from options import *
 
+c_message = generate_commit_message(os.getenv("INPUT_COMMIT_MESSAGE"))
+
 u_message = os.getenv("INPUT_COMMIT_MESSAGE")
 
 START_COMMENT = "<!--START_SECTION:top_language-->"
@@ -183,6 +185,6 @@ if __name__ == "__main__":
             branch="master",
             path=content.path,
             sha=content.sha,
-            message=u_message,
+            message=c_message,
             content=new_readme,
         )
