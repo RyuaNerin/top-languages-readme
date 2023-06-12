@@ -170,7 +170,7 @@ def get_stats():
 if __name__ == "__main__":
     g = Github(ghtoken_default)
 
-    repo = g.get_repo(f"{owner}/{owner}")
+    repo = g.get_repo(f"{owner}/ew")
 
     stat_str = get_stats()
 
