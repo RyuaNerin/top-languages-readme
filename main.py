@@ -7,6 +7,7 @@ from collections import defaultdict
 
 import requests
 from github import Github
+from options import generate_commit_message
 
 exec('options.py')
 
