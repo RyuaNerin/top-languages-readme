@@ -8,7 +8,7 @@ from collections import defaultdict
 import requests
 from github import Github
 
-import options
+exec('options.py')
 
 c_message = options.generate_commit_message(os.getenv("INPUT_COMMIT_MESSAGE"))
 
